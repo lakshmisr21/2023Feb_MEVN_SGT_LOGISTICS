@@ -31,10 +31,12 @@ export default{
   },
   methods: {
     create(){
+      const jwt = localStorage.getItem('jwt');
       let URL = this.$store.state.api_url
       axios.post(URL + 'tripsheet/newtripsheet',{
         tripsheetno:this.tripsheetno,
-        slno:this.slno
+        slno:this.slno,
+        auth_token: jwt
       }).then(respoonse=>{
         console.log(respoonse)
         this.$router.push('/tripsheet')

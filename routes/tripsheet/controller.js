@@ -1,4 +1,8 @@
-const model = require('./model')
+const model = require('./model');
+const jwt = require('jsonwebtoken');
+const userModel = require('../user/model');
+const tripModel = require('./model');
+
 
 module.exports= {
     
@@ -12,18 +16,23 @@ module.exports= {
                     return
                 }
 
-                let newtripsheet = new model({
-                tripsheetno: req.body.tripsheetno,
-                slno: req.body.slno
+                tripModel.countDocuments((err, count) => {
+                    let newtripsheet = new model({
+                        tripsheetno: count + 1,
+                        slno: req.body.slno
+                        
+                    })
+                    newtripsheet.save()
+                    .then(result =>{
+                        console.log(result)
+                        res.status(200).send({msg:'Generated Successfully',result:result})
+                    })
+                    .catch(err =>{
+                        console.log(err)
+                        res.status(401).send({msg:'Unsuccessful'})
+                    })
+                });
                 
-            })
-            newtripsheet.save()
-            .then(result =>{
-                res.status(200).send({msg:'Generated Successfully',user_id:result._id})
-            })
-            .catch(err =>{
-                res.status(401).send({msg:'Unsuccessful'})
-            })
         })
     }
 

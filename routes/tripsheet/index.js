@@ -1,6 +1,7 @@
 const router=require('express').Router()
-//const { route } = require('../user')
+const { route } = require('../user')
 const controller = require('./Controller')
 router.post('/newtripsheet',controller.newtripsheet)
-//router.get('/gettripsheet',controller.gettripsheet)
+router.get('/gettrips',controller.gettrips)
+router.get('/getTripsheet',controller.getTripsheet)
 module.exports = router

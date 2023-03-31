@@ -1,29 +1,82 @@
-const model = require('./model');
+const {tripModel,tripsheetDetailsModel} = require('./model');
 const jwt = require('jsonwebtoken');
 const userModel = require('../user/model');
-const tripModel = require('./model');
-
 
 module.exports= {
     
     newtripsheet: (req,res) => {
         let user_id = jwt.decode(req.body.auth_token).id
 
-        userModel.findById(user_id)
+        userModel.findByIdAndUpdate(user_id)
                 .then(result =>{
                 if(!result){
                     res.send({ success: false, msg: "No user was found" })
                     return
                 }
 
-                tripModel.countDocuments((err, count) => {
-                    let newtripsheet = new model({
+                
+                    // req.body.tablerows.map( (value) => {
+                    //      const sheet = new tripsheetDetailsModel({
+                    //         // slno:value.slno,
+                    //                 gcno:value.gcno,
+                    //                 consigner:value.consigner,
+                    //                 consignee:value.consignee,
+                    //                 quantity:value.quantity,
+                    //                 topay:value.topay,
+                    //                 paid:value.paid,
+                    //         });
+                    //         sheet.save();
+                    //         trips.push(sheet._id);
+                            
+                    // });
+
+                
+                
+                tripModel.countDocuments(async (err, count) => {
+               
+                    let newtripsheet = new tripModel({
                         tripsheetno: count + 1,
-                        slno: req.body.slno
-                        
-                    })
+                        vehicleno:req.body.vehicleno,
+                        place:req.body.place, 
+                         
+                                           
+                          // Tripsheet Entries
+                        // trip:[trips],
+                    // trip: req.body.tablerows.map(async value => {
+                    //     const sheet = new tripsheetDetailsModel({
+                    //         // slno:value.slno,
+                    //                 gcno:value.gcno,
+                    //                 consigner:value.consigner,
+                    //                 consignee:value.consignee,
+                    //                 quantity:value.quantity,
+                    //                 topay:value.topay,
+                    //                 paid:value.paid,
+                    //         });
+                    //         await sheet.save();
+                    //         trips.push(sheet._id);
+                    // }),
+                    trip: req.body.tablerows.map( value => {
+                        return {
+                            // slno:value.slno,
+                                    gcno:value.gcno,
+                                    consigner:value.consigner,
+                                    consignee:value.consignee,
+                                    quantity:value.quantity,
+                                    topay:value.topay,
+                                    paid:value.paid,
+                            };
+                    }),
+                    //Expenses
+                    lorryrent:req.body.lorryrent,
+                    cash:req.body.cash,
+                    unload:req.body.unload,
+                    righter:req.body.righter,
+                    amaali:req.body.amaali,
+                    miscellaneous:req.body.miscellaneous           
+                   })
                     newtripsheet.save()
                     .then(result =>{
+                        
                         console.log(result)
                         res.status(200).send({msg:'Generated Successfully',result:result})
                     })
@@ -31,12 +84,33 @@ module.exports= {
                         console.log(err)
                         res.status(401).send({msg:'Unsuccessful'})
                     })
-                });
-                
+                })                
         })
-    }
-
-       
+    },
+    gettrips: (req,res)=>{
+        tripModel.find({})
+        .then(result =>{
+           // result = result.sort(function(a,b){
+               // return b.timestamp - a.timestamp
+          //  })
+            res.send(result)
+        })
+        .catch(err =>{
+            console.log(err)
+            res.status(401).send({msg:'No Tripsheet'})
+        })
+    },
+    getTripsheet: (req, res) => {
+        tripModel.findById(req.query.id).then(result => {
+            // tripsheetDetailsModel.find({}).then(response => console.log(response, '++'))
+            // const trips = result.trip.map(v => v._id);
+            console.log(result.trip, '==');
+            // return tripsheetDetailsModel.find({'_id': { $in: trips }})
+        })
+        // .then(result => console.log(result));
+        // tripsheetDetailsModel.findById(req.query.id).then(result => console.log(result));
+        res.json({'abc': 'def'})
+    }       
  }
 
 

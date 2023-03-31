@@ -24,9 +24,11 @@ module.exports = {
             newpost.save()
             .then(result =>{
                res.send({success: true, result: result})
+               res.status(200).send({msg:'Successfully Upoloaded',user_id:result._id})
             })
             .catch(err =>{
                 if(err) res.send({ success: false, error:err })
+                res.status(401).send({msg:'Error in Uploading'})
             })
         })
     },
@@ -37,6 +39,10 @@ module.exports = {
                 return b.timestamp - a.timestamp
             })
             res.send(result)
+        })
+        .catch(err =>{
+            console.log(err)
+            res.status(401).send({msg:'No Posts'})
         })
     }
 }

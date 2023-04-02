@@ -35,8 +35,8 @@ const tripsheetSchema = new mongoose.Schema({
         consigner: String,
         consignee: String,
         quantity : Number,
-        topay : Number,
-        paid : Number
+        topay : Number,default:0,
+        paid : Number,default:0
     }] ,
 
 
@@ -47,18 +47,30 @@ const tripsheetSchema = new mongoose.Schema({
         required:true
     },
     cash:{
-        type:Number,        
+        type:Number,default:0        
     },
     unload:{
-        type:Number,        
+        type:Number,default:0         
     },
     righter:{
-        type:Number        
+        type:Number,default:0         
     },
     amaali:{
-        type:Number
+        type:Number,default:0 
     },
     miscellaneous:{
+        type:Number,default:0 
+    },
+    topaytotal:{
+        type:Number
+    },
+    paidtotal:{
+        type:Number
+    },
+    //expenses:{
+      //  type:Number
+    //},
+    balance:{
         type:Number
     }
 })

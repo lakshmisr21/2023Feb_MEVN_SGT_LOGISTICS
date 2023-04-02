@@ -63,6 +63,15 @@ let router = createRouter({
       }
     },
     {
+      path: '/tripsheet/:trip_id',
+      name: 'edit-tripsheet',
+      component: () => import('../views/tripsheet/Edittrip.vue'),
+      meta:{
+        reload:true,
+        requiresAuth: true
+      }
+    },
+    {
       path: '/penalty',
       name: 'Penalty',
       component: () => import('../views/penalty/Penalty.vue'),
@@ -154,8 +163,7 @@ let router = createRouter({
         reload:true,
         requiresAuth: true
       }
-    },
-  
+    }     
   ]
 })
 //router.onReady is not a function

@@ -44,16 +44,12 @@
         <input v-model="place" type="radio" value="Challakere" id="Challakere" name="place"/>
         <span>Challakere</span>        
       </label>      
-    </p>
-   
-  </div>
-
-    
+    </p>   
+  </div>    
   </table>
 
     <table>
-    <tr>
-      
+    <tr>      
       <th>Sl.No</th>
       <th>GC.No</th>
       <th>Consigner</th>
@@ -62,10 +58,8 @@
       <th>To Pay</th>
       <th>Paid</th>
       <th>Add</th>
-      <th>Delete</th>
-      
+      <th>Delete</th>      
     </tr>
-
     <tr v-for="(tablerow, index) in tablerows" :key="index">      
       <td> {{ tablerow.slno=index + 1 }} </td>  
       
@@ -81,13 +75,39 @@
     </tr>
     </table>
     <br>
+<!--
+    <table>      
+      <tr >           
+             <th style="text-align: center;color:blue;font-weight: bold;">Total</th>         
+              <td></td>
+              <td style="text-align: center;font-weight: bold;"><span style="align-items: right;"> {{topaytotal}} </span> </td>  
+              <td style="text-align: center;font-weight: bold;"><span style="align-items: right;"> {{paidtotal}} </span> </td>
+            </tr>   
+    </table> 
+  -->
+
+  <table>     
+            <tr>  
+                             
+              <td style="color:blue;font-weight: bold;align-items:right">To Pay Total</td>              
+              <td style="color:blue;font-weight: bold;align-items:right">Paid Total</td>   
+              <!--<td style="color:blue;font-weight: bold;align-items:right">Due</td>   -->
+            
+            </tr>
+            <tr>
+              <td style="align-items: right;color:blue;font-weight: bold;"> {{topaytotal}} </td>
+              <td style="align-items: right;color:blue;font-weight: bold;"> {{paidtotal}} </td>
+              <!--<td style="align-items: right;color:blue;font-weight: bold;"> {{balance}} </td>-->
+            </tr>
+            </table> 
+
+    <br>
     
     <div style="align-items: center;">
                    <h5 style="color:blue;text-align: center;border: 2px solid ;border-radius: 12px;padding: 5px;width: 20%;margin:auto;">Expenses</h5>
             </div>  
             <br>
-     <table>         
-        
+     <table>      
       <tr>      
       <th>Lorry Rent</th>
       <th>Cash</th>
@@ -95,8 +115,8 @@
       <th>Righter</th>
       <th>Amaali</th>   
       <th>Miscellaneous</th>   
-      </tr>
-      
+      <th>Total</th>
+      </tr>      
       <tr>
       <td><input type="text" v-model="lorryrent"/></td>   
       <td><input type="text" v-model="cash"/></td>       
@@ -104,25 +124,19 @@
       <td><input type="text" v-model="righter"/></td>
       <td><input type="text" v-model="amaali"/></td>
       <td><input type="text" v-model="miscellaneous"/></td>
+      
     </tr>
     </table>
     <br>  
 
-    <table>      
-      <tr>             
-              <th style="text-align: center;color:blue;font-weight: bold;">To Pay Total</th>         
-              <th style="text-align: center;color:blue;font-weight: bold;">Paid Total</th> 
-              <th style="text-align: center;color:blue;font-weight: bold;">Balance</th>     
-      </tr>            
 
-              <td style="text-align: center;font-weight: bold;"><span style="align-items: right;"> {{topaytotal}} </span> </td>  
-              <td style="text-align: center;font-weight: bold;"><span style="align-items: right;"> {{paidtotal}} </span> </td>
-              <td style="text-align: center;font-weight: bold;"><span style="align-items: right;">  {{balance}} </span> </td>
-    </table> 
-    <br>
+    
+    <!--Before Submit View of Total topay and paid-->
+
+    
       
       <button @click="create" class="btn green">SUBMIT</button>   <router-link to="/tripsheet">Cancel ?</router-link>            
-         
+         <!--
       <div>
           <h4>DISPLAY ENTERED ITEMS</h4>
           {{ vehicleno }}
@@ -140,8 +154,16 @@
           </li>
          </ul>
          {{ lorryrent }}
+         {{ cash }}
+         {{ unload }}
+         {{ righter }}
+         {{ amaali }}
+         {{ miscellaneous }}
+         {{ expenses }}
       </div>
+      -->
   </div>    
+
 
 </template>
     
@@ -161,13 +183,14 @@ export default{
       place:'',
       vehicleno:'',
       //gc entry
-      slno:'',
+      /*slno:'',
       gcno:'',
       consigner:'',
       consignee:'',
       quantity:'',
       topay:'',
-      paid:'',
+      paid:'',*/
+
       //Expenses
       lorryrent:0,
       cash:'',
@@ -175,6 +198,7 @@ export default{
       righter:'',
       amaali:'',
       miscellaneous:'',
+       //gc entry
       tablerows:[
         {slno:'',
       gcno:'',
@@ -184,7 +208,9 @@ export default{
       topay:0,
       paid:0,}
     ],    
-      
+    //topaytotal:0,
+    //paidtotal:0
+      //expenses:0,
           }      
   },
   methods: {
@@ -207,8 +233,8 @@ export default{
      if(idx = -1){
       this.tablerows.splice(idx, 1)
      }
-     this.topaytotal;
-     this.paidtotal
+    // this.topaytotal;
+     //this.paidtotal
     },
 //SUBMIT TRIP SHEET
     create(){
@@ -229,24 +255,19 @@ export default{
         //Trip Sheet Entry
         place:this.place,
         vehicleno:this.vehicleno,   
-        //GC Entry        
-      //   tablerows:[{
-      //   slno:this.tablerows.slno,     
-      //   gcno:this.gcno,
-      //   consigner:this.consigner,
-      //   consignee:this.consignee,
-      //   quantity:this.quantity,
-      //   topay:this.topay,
-      //   paid:this.paid
-      // }],
-      tablerows: tableValues,
+        tablerows: tableValues,
         //Expenses
         lorryrent:this.lorryrent,
         cash:this.cash,
         unload:this.unload,
         righter:this.righter,
         amaali:this.amaali,
-        miscellaneous:this.miscellaneous, 
+        miscellaneous:this.miscellaneous,
+        //Total 
+        topaytotal:this.topaytotal,
+        paidtotal:this.paidtotal,
+        //expenses:this.expenses,
+        balance:this.balance,
 
         auth_token: jwt
       };
@@ -266,20 +287,26 @@ export default{
     topaytotal: function(){
       let sum = 0;
       this.tablerows.forEach(function(tablerow) {
-         sum += (parseFloat(tablerow.topay));
-      });
-     return sum;
-    },
+        sum += (parseFloat(tablerow.topay))
+     })   
+     //this.topaytotal = sum 
+     return sum   
+       },
     
     paidtotal: function(){
       let sum = 0;
       this.tablerows.forEach(function(tablerow) {
-         sum += (parseFloat(tablerow.paid));
-      });
-     return sum;
-    },
+         sum += (parseFloat(tablerow.paid))
+      })
+        return sum
+      },
+      //expenses: function(){
+      //let exp=0
+      //exp = -this.balance-this.topaytotal+this.paidtotal    
+      //return exp
+   // },
     balance: function(){
-      let due = this.paidtotal-this.topaytotal-this.lorryrent
+      let due = this.topaytotal-this.paidtotal//-this.lorryrent-this.cash-this.unload-this.righter-this.amaali-this.miscellaneous
       return due
     }
   }

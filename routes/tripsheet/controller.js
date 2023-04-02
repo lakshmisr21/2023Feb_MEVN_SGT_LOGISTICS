@@ -72,7 +72,12 @@ module.exports= {
                     unload:req.body.unload,
                     righter:req.body.righter,
                     amaali:req.body.amaali,
-                    miscellaneous:req.body.miscellaneous           
+                    miscellaneous:req.body.miscellaneous, 
+                    //Total
+                    topaytotal:req.body.topaytotal,     
+                    paidtotal:req.body.paidtotal,
+                    //expenses:req.body.expenses,
+                    balance:req.body.balance     
                    })
                     newtripsheet.save()
                     .then(result =>{
@@ -100,6 +105,7 @@ module.exports= {
             res.status(401).send({msg:'No Tripsheet'})
         })
     },
+    
     getTripsheet: (req, res) => {
         tripModel.findById(req.query.id).then(result => {
             // tripsheetDetailsModel.find({}).then(response => console.log(response, '++'))
@@ -110,8 +116,44 @@ module.exports= {
         // .then(result => console.log(result));
         // tripsheetDetailsModel.findById(req.query.id).then(result => console.log(result));
         res.json({'abc': 'def'})
-    }       
- }
+    },      
+
+    gettripid:(req,res) =>{
+        model.findById(req.params.id)
+        .then(result =>{           
+            res.send(result)           
+        })
+ },
+
+ deletetripid:async (req,res) =>{
+    try {
+ res.status(200).json((await model.findByIdAndDelete(req.params.id)))
+} catch (e) {
+  res.status(500).json(e)
+  console.log(e)
+}
+},
+
+updatetripid:async (req,res)=>{
+   
+     try {
+         const {
+            vehicleno,
+            place,
+             gcno,
+
+         } = req.body
+         res.status(200).json((await model.findByIdAndUpdate(req.params.id, {
+            vehicleno, 
+            place,
+            gcno,
+         })))
+     } catch (e) {
+         res.status(500).json(e)
+     }
+ },
+
+}
 
 
 

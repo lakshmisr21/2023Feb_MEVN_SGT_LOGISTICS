@@ -17,9 +17,12 @@
       <li v-for="trip in filteredTrips" :key="trip._id">
         <div class="collapsible-header" style="padding-right:50px" :id="trip._id">
           <i class="fa fa-truck"></i>
+          
+          
 
          <div style="align-items: center;text-align: center;color:blue">
           {{ trip.tripsheetno }}
+          <router-link class="secondary-content" v-bind:to="{ name: 'edit-tripsheet', params: { trip_id: trip._id }}"><i class="fa fa-edit" style="font-size:26px;color:red"></i></router-link> 
          </div>
         </div>
   
@@ -50,10 +53,11 @@
           </div>
           
          <div >      
-           
+         
              <table id="customers" >     
                     
               <tr>
+               <th>EDIT</th>
                 <th>SL NO</th>
                 <th>GC NO</th>
                 <th>CONSIGNER</th>
@@ -61,26 +65,136 @@
                 <th>QUANTITY</th>
                 <th>TO PAY</th>
                 <th>PAID</th>
+                
               </tr>
              
               <tbody>
+               
               <tr v-for="(trip, key) in trip.trip" :key="trip.gcno">  
-                <!-- <td> {{ trip }}</td> -->
+                
+                  <router-link class="secondary-content" v-bind:to="{ name: 'edit-tripsheet', params: { trip_id: trip._id }}"><i class="fa fa-edit" style="font-size:26px;color:red"></i></router-link> 
+                
                 <td>  {{ key+1 }}  </td>
                 <td> {{trip.gcno}}  </td>      
                 <td> {{trip.consigner}}  </td>
                 <td> {{trip.consignee}} </td>
                 <td> {{trip.quantity}} </td>
-                <td>{{trip.topay}} </td>
-                <td>{{trip.paid}} </td> 
+                <td style="align-items: right">{{trip.topay}} </td>
+                <td style="align-items: right">{{trip.paid}} </td> 
+                <!--<td>
+                  <button @click="editpage" class="btn waves-effect waves-red" type="submit" name="action">EDIT
+                  <i class="material-icons right">send                  
+                </i> 
+                </button>
+                </td>
+                <td><router-link class="secondary-content" v-bind:to="{ name: 'edit-tripsheet'}"><i class="fa fa-edit" style="font-size:26px;color:blue"></i></router-link> </td>-->
                 </tr>
             </tbody>    
           </table>  
-          <br>
+
+          <div>
             
+          </div>
+         
+
+
+        <!--
+          <table>
+              <tr>               
+              <td style="color:blue;font-weight: bold;align-items:right">Total</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                
+              <td style="align-items: center;color:blue;font-weight: bold;"> {{trip.topaytotal}} </td>
+              <td style="align-items: center;color:blue;font-weight: bold;"> {{trip.paidtotal}} </td>            
+            </tr>          
+            </table>   
+
+
+             <table>
+              <tr> 
+                <td style="color:blue;font-weight: bold;align-items:right">Expenses</td>              
+              <td style="color:blue;font-weight: bold;align-items:right">Balance</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td style="align-items: center;color:blue;font-weight: bold;"> {{trip.expenses}} </td>
+                <td style="align-items: center;color:blue;font-weight: bold;"> {{trip.balance}} </td>
+                         
+            </tr>             
+            </table> 
+            -->
+
           <h6 style="text-align: center;color:blue;font-weight: bold;">EXPENSES</h6>
             <br>
-            <table id="expenses">
+            <table id="customers">
               <tr>               
               <th>LORRY RENT</th>
               <th>CASH</th>
@@ -96,18 +210,21 @@
               <td>{{ trip.righter }}</td>
               <td>{{ trip.amaali }}</td>
               <td>{{ trip.miscellaneous }} </td>
+             
             </tr>
             </table>   
+              <br> 
+            <table id="customers">      
+      <tr>             
+              <th style="text-align: center;color:blue;font-weight: bold;">To Pay Total</th>         
+              <th style="text-align: center;color:blue;font-weight: bold;">Paid Total</th> 
+              <th style="text-align: center;color:blue;font-weight: bold;">Collection Due</th>     
+      </tr>            
 
-                  
-             <table>
-              <tr>               
-              <th>Total</th>
-              <td></td>
-              <td></td>
-              <td><span style="align-items: right;"> {{this.totaltopay}} </span> </td>
-            </tr>             
-            </table>   
+              <td style="text-align: center;font-weight: bold;"><span style="align-items: right;"> {{trip.topaytotal}} </span> </td>  
+              <td style="text-align: center;font-weight: bold;"><span style="align-items: right;"> {{trip.paidtotal}} </span> </td>
+              <td style="text-align: center;font-weight: bold;"><span style="align-items: right;">  {{trip.balance}} </span> </td>
+    </table> 
             
             
           </div>
@@ -115,6 +232,7 @@
         </li>        
     </ul>
    </div>
+   
   </div>  
 
   
@@ -134,7 +252,9 @@
       return{
         trips:[],
         search:'',
-        totaltopay:0
+        //totaltopay:0,
+        //totalpaid:0,
+        //balance:0,
       }
     },
     computed:{
@@ -174,13 +294,17 @@
     },
     methods: {
 
-       total(){
+       /*total(){
         this.totaltopay=0
         this.topays.forEach((topay)=>{
           this.totaltopay+=topay
           console.log(totaltopay)
         })
-       },    
+       },  */  
+
+       editpage(){
+        this.$router.push({name:'/edit-tripsheet'})
+       },
        timestampToDate (timestamp) {
         timestamp = new Number(timestamp)
         let d = new Date(timestamp)
@@ -214,6 +338,7 @@
   #customers td, #customers th {
     border: 1px solid #ddd;
     padding: 8px;
+    text-align: center;
     /*display: inline-block;*/
   }
   
@@ -224,7 +349,7 @@
   #customers th {
     padding-top: 12px;
     padding-bottom: 12px;
-    text-align: left;
+    text-align: center;
     background-color: #ecf8f2;
     color: rgb(21, 20, 20);
   }
@@ -233,7 +358,7 @@
   #expenses th {
     padding-top: 12px;
     padding-bottom: 12px;
-    text-align: left;
+    text-align: center;
     background-color: #f8f6ec;
     color: rgb(21, 20, 20);
   }

@@ -119,7 +119,7 @@ module.exports= {
     },      
 
     gettripid:(req,res) =>{
-        model.findById(req.params.id)
+        tripModel.findById(req.params.id)
         .then(result =>{           
             res.send(result)           
         })
@@ -127,7 +127,7 @@ module.exports= {
 
  deletetripid:async (req,res) =>{
     try {
- res.status(200).json((await model.findByIdAndDelete(req.params.id)))
+ res.status(200).json((await tripModel.findByIdAndDelete(req.params.id)))
 } catch (e) {
   res.status(500).json(e)
   console.log(e)

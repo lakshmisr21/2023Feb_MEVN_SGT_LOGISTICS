@@ -21,8 +21,10 @@
           
 
          <div style="align-items: center;text-align: center;color:blue">
-          {{ trip.tripsheetno }}
-          <router-link class="secondary-content" v-bind:to="{ name: 'edit-tripsheet', params: { trip_id: trip._id }}"><i class="fa fa-edit" style="font-size:26px;color:red"></i></router-link> 
+          <p class="alignleft" style="color:red;font-weight:bold;">Trip Sheet No: {{trip.tripsheetno}}</p>
+          
+            <router-link class="secondary-content" v-bind:to="{ name: 'view-tripsheet', params: { trip_id: trip._id }}"><i class="fa fa-eye" style="font-size:26px;color:blue"></i></router-link> 
+            
          </div>
         </div>
   
@@ -57,7 +59,7 @@
              <table id="customers" >     
                     
               <tr>
-               <th>EDIT</th>
+               
                 <th>SL NO</th>
                 <th>GC NO</th>
                 <th>CONSIGNER</th>
@@ -70,12 +72,14 @@
              
               <tbody>
                
-              <tr v-for="(trip, key) in trip.trip" :key="trip.gcno">  
+              <tr v-for="(trip, index) in trip.trip" :key="trip.gcno._id">  
                 
-                  <router-link class="secondary-content" v-bind:to="{ name: 'edit-tripsheet', params: { trip_id: trip._id }}"><i class="fa fa-edit" style="font-size:26px;color:red"></i></router-link> 
                 
-                <td>  {{ key+1 }}  </td>
-                <td> {{trip.gcno}}  </td>      
+                
+                <td>  {{ index+1 }}  </td>
+                <td> {{trip.gcno}}  
+                  <!--<router-link class="secondary-content" v-bind:to="{ name: 'edit-tripsheet', params: { trip_id: trip._id }}"><i class="fa fa-edit" style="font-size:16px;color:red"></i></router-link> -->
+                </td>      
                 <td> {{trip.consigner}}  </td>
                 <td> {{trip.consignee}} </td>
                 <td> {{trip.quantity}} </td>
@@ -287,7 +291,7 @@
               })
               .then(response =>{
                   this.trips = response.data
-                  console.log(this.trips);
+                  //console.log(this.trips);
               }).catch(function(error) {
                 console.log(error);
             });

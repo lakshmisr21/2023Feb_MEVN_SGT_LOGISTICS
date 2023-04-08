@@ -64,6 +64,15 @@ let router = createRouter({
     },
     {
       path: '/tripsheet/:trip_id',
+      name: 'view-tripsheet',
+      component: () => import('../views/tripsheet/Viewtrip.vue'),
+      meta:{
+        reload:true,
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/tripsheet/:trip_id',
       name: 'edit-tripsheet',
       component: () => import('../views/tripsheet/Edittrip.vue'),
       meta:{

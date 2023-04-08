@@ -6,72 +6,25 @@
 
 
   <div class="form-row">
-    <label for="vehicleno" class="form-label">Vehicle Numeber :{{ trip.vehicleno }}</label>
-    <!--<input class="form-control" style="width:40%;float: left; margin-left: 1rem;" type="text" v-model="vehicleno" placeholder="Vehicle Number">--> 
+    <!--<label for="vehicleno" class="form-label">Vehicle Numeber :{{ trip.vehicleno }}</label>
+    <input class="form-control" style="width:40%;float: left; margin-left: 1rem;" type="text" v-model="vehicleno" placeholder="Vehicle Number">--> 
     <br>
 </div>
-<div v-for="trip in trip.trip" :key="trip._id">
+<div class="form-row" v-for="trip in trip.trip" :key="trip._id">
     <label for="gcno">Gc Number</label>  {{trip.gcno}} 
-    <div v-for="tablerow in tablerows" :key="tablerow._id">
-      <router-link class="secondary-content" v-bind:to="{ name: 'edit-tripsheet', params: { trip_id: trip._id }}"><i class="fa fa-edit" style="font-size:16px;color:red"></i></router-link> 
-    <!--<input class="form-control" style="width:40%; margin-left: 1rem;" type="number" v-model="tablerow.gcno" placeholder="Gc Number">   -->
+    <div style="flot: left;margin: left;"  v-for="tablerow in tablerows" :key="tablerow._id">
+      
+      <router-link class="secondary-content" v-bind:to="{ name: 'edit-tripsheet', params: { tablerow_id: tablerow._id }}"><i class="fa fa-edit" style="font-size:16px;color:red"></i></router-link> 
+    
+      <!--<input class="form-control" style="width:40%; margin-left: 1rem;" type="number" v-model="tablerow.gcno" placeholder="Gc Number">   -->
    </div>
 </div>
-          <!--
-        <div id="product-list-two"> 
-           <ul>       
-               <li>            
-               <label for="vehicleno">Vehicle Number:   {{trip.vehicleno}}  <input type="text" v-model="vehicleno" placeholder="Vehicle Number">    </label>
-              </li>                
-           </ul> 
-        </div>
-
-
-     
-        <table id="customers">
-            <tr>
-                <td>TRIP SHEET NUMBER</td>
-            </tr>
-            <tr>
-                <th>{{ trip.tripsheetno }}</th>
-            </tr>
-        </table>
-        -->
-    <!--
-         <div class="row" style="position:abosolute">
-    <form @submit.prevent="updatetrip" class="col s12">
-      <div class="row">
-        <div class="input-field col s12">
-            <label for="vehicleno"></label>  {{trip.vehicleno}} 
-            <input type="text" v-model="vehicleno" placeholder="Vehicle Number">   
-          </div>
-      </div>
-      <table id="customers" >     
-                    
-                    <tr>
-                      <th>GC NO</th>                   
-                    </tr>
-                   
-                    <tbody>                     
-                    <tr v-for="trip in trip.trip" :key="trip.gcno">                       
-                        <router-link class="secondary-content" v-bind:to="{ name: 'edit-tripsheet', params: { trip_id: trip._id }}"><i class="fa fa-edit" style="font-size:26px;color:red"></i></router-link> 
-                        <td> <label for="vehicleno"></label>  {{trip.gcno}} 
-                        <input type="text" v-model="vehicleno" placeholder="Vehicle Number">                 
-                         </td>   
-                        </tr>
-                  </tbody>    
-            </table>  
-             </form>
-              </div>
--->
-
+        
                 <br>
     <button type="submit" class="btn" style="margin-right: 16px;border-radius: 12px;">Update</button>
       <router-link to="/tripsheet" class="btn blue" style="border-radius: 12px;">Cancel</router-link>
       
-   <!--<router-link class="secondary-content" v-bind:to="{ name: 'edit-tripsheet'}"><i class="fa fa-edit" style="font-size:26px;color:blue"></i></router-link> 
-   <button type="submit" @click="removetrip"><i style="font-size:28px;color:red;cursor: pointer;" class="fa fa-trash-alt"></i></button>        -->                         
-
+   
      </div>
     
    </template>
@@ -83,7 +36,7 @@
       data(){
        return{
          trip:[],
-         vehicleno:null,
+         //vehicleno:null,
          tablerows:[
         {
       gcno:''
@@ -102,27 +55,7 @@
      },
      methods: {
 
-        async updatetrip(){
-        try {
-            const tableValues = this.tablerows.map(value => {
-        return {          
-        vehicleno:this.vehicleno,
-        gcno:value.gcno
-      }
-      })
-      console.log('Update Button Clicked')
-            const path=this.$router.currentRoute.value.path
-            console.log(path)
-            await axios.put('http://localhost:3000'+path,{
-              tableValues                
-            })
-
-    } catch (e) {
-          console.error("Error Updating document: ", e);
-        }
-        this.$router.push({ name: 'view-user' })
-        }
-            
+                    
    },
 
         timestampToDate (timestamp) {

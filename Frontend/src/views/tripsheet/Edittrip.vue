@@ -11,15 +11,15 @@
      <input class="form-control" style="width:40%; margin-left: 1rem;" type="number" v-model="trip.gcno" placeholder="Gc Number">   
    </div>
    
-   <button type="submit" @click="removetrip"><i style="font-size:28px;color:red;cursor: pointer;" class="fa fa-trash-alt"></i></button>                             
+   <i style="font-size:28px;color:red;cursor: pointer;" class="fa fa-trash-alt"> <button type="submit" @click="removetrip"></button> </i>                            
 
 </div>
 <br>
-    <button type="submit" class="btn" style="margin-right: 16px;border-radius: 12px;">Update</button>
-      <router-link to="/tripsheet" class="btn blue" style="border-radius: 12px;">Cancel</router-link>
- 
-     
-   </form>
+</form>
+     <button @click="updatetrip" type="submit" class="btn red" style="margin-right: 16px;border-radius: 12px;">Update</button>
+     <button @click="goBack" type="submit" class="btn blue" style="margin-right: 16px;border-radius: 12px;">Back</button>
+     <router-link to="/tripsheet" class="btn blue" style="border-radius: 12px;">Cancel</router-link>
+   
   </div>
 
 
@@ -35,7 +35,8 @@ name:'edit-tripsheet',
 data(){
     return{
         trip:[],
-        vehicleno:null,
+        //vehicleno:null,
+        //gcno:null,
         tablerows:[
         {
       gcno:''
@@ -53,37 +54,66 @@ async mounted(){
     },
 methods:{
   async updatetrip(){
-        try {
+
+   /* try {
+            alert('Update Button Clicked')
+            const path=this.$router.currentRoute.value.path
+            //console.log(path)
+ 
             const tableValues = this.tablerows.map(value => {
         return {  
         gcno:value.gcno
-      }
+        }
+            })
+            let URL = this.$store.state.api_url;
+            const jwt = localStorage.getItem('jwt');
+            const values= {
+              tablerows: tableValues,
+              auth_token: jwt
+            }
+
+            await axios.put('http://localhost:3000'+path, {values})
+                 console.log('Tripsheet Updated Successfully')
+        } catch (e) {
+          console.error("Error Updating document: ", e);
+        }
+        this.$router.push({ name: 'Tripsheet' })
+        */
+   
+        
+       try {
+            const tableValues = this.tablerows.map(value => {
+        return {  
+        gcno:value.gcno
+            }
       
-      });
-       alert('Update Button Clicked')
-       console.log(this.gcno)
-       let URL = this.$store.state.api_url;
-       console.log('URL:',URL)
-       //const jwt = localStorage.getItem('jwt')
-       const values =
+         });
+         alert('Update Button Clicked')
+       
+       //let URL = this.$store.state.api_url;
+       //console.log('URL:',URL)
+          const jwt = localStorage.getItem('jwt')
+          const values =
            {
             //vehicleno: this.vehicleno,
             tablerows: tableValues,
-            //auth_token: jwt
+            auth_token: jwt
            };
             const path=this.$router.currentRoute.value.path
             console.log('Path:',path)
            //await axios.put('http://localhost:3000'+path,values).then(response=>{
-            axios.put('http://localhost:3000'+path, values).then(response=>{
+           // axios.put('http://localhost:3000'+path, values).then(response=>{
+            axios.put('http://localhost:3000'+path,values).then(response=>{
             console.log(response)
             alert('Successfully Updated')
            })
-
     } catch (e) {
           console.error("Error Updating document: ", e);
         }
         this.$router.push({ name: 'Tripsheet' })
-        },
+        
+
+      },
 
     async removetrip(){
     if(confirm){
@@ -97,6 +127,9 @@ methods:{
     this.$router.push({ name: 'Tripsheet' })
     }
   },
+  goBack() {
+      window.history.back();
+    },
 }
 }
 </script>

@@ -21,7 +21,7 @@
 </div>
         
                 <br>
-    <button type="submit" class="btn" style="margin-right: 16px;border-radius: 12px;">Update</button>
+   
       <router-link to="/tripsheet" class="btn blue" style="border-radius: 12px;">Cancel</router-link>
       
    

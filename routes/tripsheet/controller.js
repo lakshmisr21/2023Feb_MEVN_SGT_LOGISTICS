@@ -135,23 +135,22 @@ module.exports= {
 },
 
 updatetripid:async (req,res)=>{
+
    
      try {
 
         trip: req.body.tablerows.map( value => {
             return {                
-                        gcno:value.gcno,                        
-                };
+                        gcno:value.gcno                        
+                }
         });
-         const {
-            vehicleno,         
-            
-         } = req.body
+        
          
-         res.status(200).json((await tripModel.findByIdAndUpdate(req.params.id, {
-            vehicleno, 
-            
-         })))
+         res.status(200).json((await tripModel.findByIdAndUpdate(req.params.id, 
+             value={
+                gcno                
+             } = req.body
+         )))
      } catch (e) {
          res.status(500).json(e)
      }

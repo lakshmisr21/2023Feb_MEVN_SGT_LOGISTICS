@@ -139,18 +139,18 @@ updatetripid:async (req,res)=>{
    
      try {
 
-        trip: req.body.tablerows.map( value => {
-            return {                
-                        gcno:value.gcno                        
+       let tablerows = req.body.tablerows.map( value => {
+           return {                
+                       gcno:value.gcno                        
                 }
         });
-        
+       // const value = {
+          //  gcno,
+       // } = req.body
          
-         res.status(200).json((await tripModel.findByIdAndUpdate(req.params.id, 
-             value={
-                gcno                
-             } = req.body
-         )))
+         res.status(200).json((await tripModel.findByIdAndUpdate(req.params.id,tablerows
+            
+               )))
      } catch (e) {
          res.status(500).json(e)
      }

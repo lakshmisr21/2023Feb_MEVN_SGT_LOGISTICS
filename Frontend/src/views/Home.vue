@@ -1,5 +1,6 @@
 <template>
 <div style="margin:25%">
+  
  
   <div class="row cardsmall">
     <div class="col s12 m6">
@@ -15,12 +16,57 @@
           <i class="fas fa-truck-moving"></i>
           <p>View Trip Sheet Reports / Update / Create New </p>
         </div>
-          <router-link to="/admin" >
+          <router-link to="/tripsheet" >
             <i class="fa fa-eye" style="font-size:26px;color:blue;curson:pointer;"></i>
             </router-link>
       </div>
     </div>
   </div>
+
+  <div class="row cardsmall">
+    <div class="col s12 m6">
+      <div class="card">
+        <div class="card-image">
+          <img src="../assets/Collection.png">
+          <span class="card-title"></span>
+         <router-link to="/admin" >
+          <a class="btn-floating halfway-fab waves-effect waves-light green"><i class="material-icons">add</i></a>
+          </router-link>
+        </div>
+        <div class="card-content">
+          <i class="fas fa-truck-moving"></i>
+          <p>View & Add Collection Entries </p>
+        </div>
+          <router-link to="/collection" >
+            <i class="fa fa-eye" style="font-size:26px;color:blue;curson:pointer;"></i>
+            </router-link>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="row cardsmall">
+    <div class="col s12 m6">
+      <div class="card">
+        <div class="card-image">
+          <img src="../assets/cash-deposit-to-bank.jpg">
+          <span class="card-title"></span>
+         <router-link to="/admin" >
+          <a class="btn-floating halfway-fab waves-effect waves-light green"><i class="material-icons">add</i></a>
+          </router-link>
+        </div>
+        <div class="card-content">
+          <i class="fas fa-truck-moving"></i>
+          <p>Bank Deposit Entries </p>
+        </div>
+          <router-link to="/deposit" >
+            <i class="fa fa-eye" style="font-size:26px;color:blue;curson:pointer;"></i>
+            </router-link>
+      </div>
+    </div>
+  </div>
+
 
   <div class="row cardsmall">
     <div class="col s12 m6">
@@ -176,11 +222,13 @@ export default {
     return{
       //
       //feed:[]
+      
     }
   },
    mounted() {
-     this.$store.commit('isAuthenticated')
+     
   },
+
   //mounted() {
    // const response = axios.get('post/getposts')
     //this.feed = response.data

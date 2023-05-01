@@ -1,5 +1,6 @@
 <template>
   <header class="page-header white" style="margin:50px">
+   
      <!-- <button @click="goto('/')" class="button"><i class="material-icons">home</i>Home</button> -->
        <button @click="goto('/newpost')" style="margin:5px;" class="btn"><i class="material-icons">add_a_photo</i>Camera</button>
        <button @click="goto('/Profile')" style="margin:5px;" class="btn"><i class="material-icons">account_circle</i>Profile</button>
@@ -21,9 +22,18 @@
 import axios from 'axios'
 
 export default {
+ data(){
+  return{
+    
+  }
+ },
+ 
+
   beforeMount() {
       this.$store.state.mutations
-  },
+    },
+
+  
   methods: {
   logout (){
      localStorage.removeItem('jwt')

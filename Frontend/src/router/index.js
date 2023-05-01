@@ -80,6 +80,27 @@ let router = createRouter({
         requiresAuth: true
       }
     },
+
+    {
+      path: '/collection',
+      name: 'Collection',
+      component: () => import('../views/tripsheet/Collection.vue'),
+      meta:{
+        reload:true,
+        requiresAuth: true
+      }
+    },
+
+    {
+      path: '/deposit',
+      name: 'Deposit',
+      component: () => import('../views/tripsheet/Deposit.vue'),
+      meta:{
+        reload:true,
+        requiresAuth: true
+      }
+    },
+
     {
       path: '/penalty',
       name: 'Penalty',

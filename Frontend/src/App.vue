@@ -1,5 +1,6 @@
 <template>
-  <div>         
+  <div>    
+    <p style="text-align: center;color: blue;">Welcome ! {{ name }}</p>     
     <Sidebar v-if="isAuthenticated"/>
     <div :style="{ 'margin-left': sidebardWidth }"></div>
       <Header v-if="isAuthenticated"/>        
@@ -29,10 +30,22 @@ export default {
   data(){
     return{
      // feed:[],
+     user:[],
+     name:''
     }
   },
-  mounted() {
+  async mounted() {
      this.$store.commit('isAuthenticated')
+     let api_url = this.$store.state.api_url
+                await axios.get(api_url + 'user/getusers', {
+                auth_token: localStorage.getItem('jwt'),                
+            })
+            .then(response =>{
+                //this.name = response.data
+                //return this.$store.state.user
+                this.name = response.data
+                
+            })
   },
   //async mounted() {
    // const response = await axios.get('http://localhost:3000/post/getposts')
@@ -41,7 +54,8 @@ export default {
   computed:{
     isAuthenticated(){
       //return false;
-      return this.$store.state.isAuthenticated       
+       return this.$store.state.isAuthenticated    
+       
     }
   },
   beforeMount() {

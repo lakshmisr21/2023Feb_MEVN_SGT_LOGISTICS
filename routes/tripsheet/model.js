@@ -72,7 +72,9 @@ const tripsheetSchema = new mongoose.Schema({
     //},
     balance:{
         type:Number
-    }
+    },
+    deposit:{ type:Number,default:0},
+    depositdue:{ type:Number,default:0}
 })
 
 

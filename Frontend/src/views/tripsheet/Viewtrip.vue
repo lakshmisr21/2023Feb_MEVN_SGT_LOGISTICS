@@ -75,16 +75,7 @@
    
          return day + '/' + month + '/' + year + ' ' + hour + ':' + minute
        }, 
-        async removetrip(){
-       if(confirm){
-       alert('Are you sure?')
-       const path=this.$router.currentRoute.value.path
-       console.log(path)    
-       await axios.delete('http://localhost:3000'+path)
-       console.log('Trip Sheet Successfully Deleted')
-       this.$router.push({ name: 'tripsheet' })
-       }
-       },
+        
      }
     
    

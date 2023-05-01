@@ -72,7 +72,7 @@
              
               <tbody>
                
-              <tr v-for="(trip, index) in trip.trip" :key="trip.gcno._id">  
+              <tr v-for="(trip, index) in trip.trip" :key="index">  
                 
                 
                 
@@ -206,6 +206,7 @@
               <th>RIGHTER</th>
               <th>AMAALI</th>
               <th>MISCELLANEOUS</th>
+              
             </tr>
             <tr>
               <td>{{ trip.lorryrent }}</td>
@@ -214,11 +215,12 @@
               <td>{{ trip.righter }}</td>
               <td>{{ trip.amaali }}</td>
               <td>{{ trip.miscellaneous }} </td>
+              
              
             </tr>
             </table>   
               <br> 
-            <table id="customers">      
+      <table id="customers">      
       <tr>             
               <th style="text-align: center;color:blue;font-weight: bold;">To Pay Total</th>         
               <th style="text-align: center;color:blue;font-weight: bold;">Paid Total</th> 
@@ -229,7 +231,9 @@
               <td style="text-align: center;font-weight: bold;"><span style="align-items: right;"> {{trip.paidtotal}} </span> </td>
               <td style="text-align: center;font-weight: bold;"><span style="align-items: right;">  {{trip.balance}} </span> </td>
     </table> 
-            
+
+
+           
             
           </div>
         </div>         

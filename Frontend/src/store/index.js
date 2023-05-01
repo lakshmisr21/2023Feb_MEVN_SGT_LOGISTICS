@@ -34,13 +34,17 @@ export default createStore({
     },
     isAuthenticated (state){
       if(localStorage.getItem('jwt') != null)
+      {
       state.isAuthenticated = true
-      else state.isAuthenticated = false
+      
+    }
+        else state.isAuthenticated = false
     }
   },
   login (state, token) {
     state.isAuthenticated = true
     localStorage.setItem('jwt', token)
+    return this.$store.state.user
     this.$router.push('/')
     //router.push('/')
   },

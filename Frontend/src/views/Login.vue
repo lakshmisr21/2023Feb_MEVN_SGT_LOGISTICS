@@ -63,7 +63,8 @@ beforeMount() {
 },
  computed:{
     isAuthenticated(){
-     return this.$store.state.isAuthenticated      
+     return this.$store.state.isAuthenticated   
+     //return this.$store.state.user   
     }
   },
 

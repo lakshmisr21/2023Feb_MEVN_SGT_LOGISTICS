@@ -92,12 +92,12 @@ methods:{
        
        //let URL = this.$store.state.api_url;
        //console.log('URL:',URL)
-          const jwt = localStorage.getItem('jwt')
+          //const jwt = localStorage.getItem('jwt')
           const values =
            {
             //vehicleno: this.vehicleno,
             tablerows: tableValues,
-            auth_token: jwt
+            //auth_token: jwt
            };
             const path=this.$router.currentRoute.value.path
             console.log('Path:',path)
@@ -108,7 +108,7 @@ methods:{
             alert('Successfully Updated')
            })
     } catch (e) {
-          console.error("Error Updating document: ", e);
+          console.error("Error Updating document: ", e)
         }
         this.$router.push({ name: 'Tripsheet' })
         

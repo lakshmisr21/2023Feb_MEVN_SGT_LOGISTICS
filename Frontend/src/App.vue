@@ -1,6 +1,6 @@
 <template>
   <div>    
-    <p style="text-align: center;color: blue;">Welcome ! {{ name }}</p>     
+    <!--<p style="text-align: center;color: blue;">Welcome ! {{ name }}</p>-->     
     <Sidebar v-if="isAuthenticated"/>
     <div :style="{ 'margin-left': sidebardWidth }"></div>
       <Header v-if="isAuthenticated"/>        

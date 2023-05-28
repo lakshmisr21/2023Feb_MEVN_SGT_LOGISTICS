@@ -16,37 +16,50 @@
             </div>  
             <br>
             
-            <!--
+           <!--
             <i class="fa fa-search-plus" style="margin: 5%;font-size:22px;color:blue;"> </i>
               <input class="input" style="text-align: center;width:40%;" v-model="search" placeholder="Search Tripsheet Number"/>
-              -->
+            -->
               <br>
-              <div style="margin-left: 12%;width: 40%;">
+               <div style="margin-left: 12%;width: 40%;">
               <input type="date" v-model="startDate">
               <input type="date" v-model="endDate">
               </div>
               <br>
 
       <ul>
-          <li v-for="trip in filteredTrips" :key="trip._id">           
+          <li v-for="trip in filteredTrips" :key="trip.trip_date">           
             <table id="customers">
               <tr>   
-                <th>Trip Sheet Number</th>            
-              <th>Trip Date</th>
-              <th>Bank Deposit</th>   
-              <th>Bank Deposit Due</th>             
-              
-            </tr> 
+                <th style="width:10%">Trip Sheet Number</th>            
+              <th style="width:10%">Trip Date</th>
+                                  
+              </tr> 
             <tbody>
             <tr>
               <td>{{ trip.tripsheetno }}</td>
               <td>{{timestampToDate(trip.trip_date)}} </td>
-              <td><input type="number" v-model="deposit"/></td> 
-              <td>{{ trip.depositdue }}</td>                           
-             </tr>
+             
+            </tr>
              </tbody>
             </table> 
+            <table id="customers">
+            <tr>
+              <th style="color: blue;">Enter Bank Deposit Amount</th>   
+              <th style="color: red;">Deposit Due</th>   
+            </tr>
+            <tbody>
+              <tr>
+              <td><input type="number" v-model="deposit"/></td> 
+              <td>{{ trip.topaytotal }}</td>   
+            </tr>
+            </tbody>
+          </table>
+
           </li>
+          <br>         
+          <button @click="Submit" class="btn green">SUBMIT</button> 
+        
         </ul>
  </div>
 </template>
@@ -68,23 +81,68 @@ export default {
     },
 
     computed:{
+     
         filteredTrips: function(){
-          //return this.trips.filter((trip)=>{
-            //return trip.tripsheetno.toLowerCase().match(this.search.toLowerCase())
-          //}
-            
+           /*
+          return this.trips.filter((trip)=>{
+            return trip.tripsheetno.toLowerCase().match(this.search.toLowerCase())
+          })
+            */
+
+          /*  if (this.startDate && this.endDate) {
+        return this.trips.filter(trip_date => trip_date >= this.startDate && trip_date <= this.endDate);
+      } else {
+        return this.trips;
+      }*/
+
+      if (this.startDate && this.endDate) {
+        return this.trips.filter((trip)=>{
+          return trip_date => trip_date >= this.startDate && trip_date <= this.endDate
+        })
+      } else {
+        return this.trips;
+      }
            
-        if (!this.startDate || !this.endDate) {
+        /*
+        if (!this.startDate && !this.endDate) {
           return this.trips
           }
           return this.trips.filter(trip => {
-          const tripDate = new Date(trip.trip_date);
+          const tripDate = new Date(trip_date);
           const start = new Date(this.startDate);
           const end = new Date(this.endDate);
-          return tripDate >= start && tripDate <= end   
-                    
+          return tripDate >= start && tripDate <= end                       
          })
+         */
+         
+        /*
+        let filterType = this.selectedType
+        if (!filterType) return this.trips;
+
+       let startDate = this.startDate && new Date(this.startDate);
+       let endDate = this.endDate && new Date(this.endDate);
+       return this.trips.filter(trip => {
+        return trip.type == filterType;
+      }).filter(trip => {
+        const itemDate = new Date(trip_date)
+        if (startDate && endDate) {
+          return startDate <= itemDate && itemDate <= endDate;
         }
+        if (startDate && !endDate) {
+          return startDate <= itemDate;
+        }
+        if (!startDate && endDate) {
+          return itemDate <= endDate;
+        }
+        return true;  // when neither startDate nor endDate selected
+      })
+      */
+
+
+
+
+
+}
     },
     mounted(){
         let api_url = this.$store.state.api_url;

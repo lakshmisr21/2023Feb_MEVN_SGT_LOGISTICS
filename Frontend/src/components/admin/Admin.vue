@@ -71,7 +71,7 @@
       <div class="col s12 m6">
         <div class="card">
           <div class="card-image">
-            <img src="../../assets/MIssing.jpg">
+            <img src="../../assets/Missing.jpg">
             <span class="card-title">Missing</span>
              <router-link to="#">
             <a class="btn-floating halfway-fab waves-effect waves-light green"><i class="material-icons">add</i></a>

@@ -27,7 +27,7 @@
     <div class="col s12 m6">
       <div class="card">
         <div class="card-image">
-          <img src="../assets/Collection.png">
+          <img src="../assets/TripCollection.jpg">
           <span class="card-title"></span>
          <router-link to="/admin" >
           <a class="btn-floating halfway-fab waves-effect waves-light green"><i class="material-icons">add</i></a>
@@ -95,7 +95,7 @@
     <div class="col s12 m6">
       <div class="card">
         <div class="card-image">
-          <img src="../assets/MIssing.jpg">
+          <img src="../assets/Missing.jpg">
           <span class="card-title">Missing</span>
          <router-link to="/admin" >
           <a class="btn-floating halfway-fab waves-effect waves-light green"><i class="material-icons">add</i></a>

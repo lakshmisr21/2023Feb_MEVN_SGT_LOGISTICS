@@ -45,6 +45,15 @@ let router = createRouter({
       }
     },
     {
+      path: '/gc',
+      name: 'GC',
+      component: () => import('../views/gc/gc.vue'),
+      meta:{
+        reload:true,
+        requiresAuth: true
+      }
+    },
+    {
       path: '/tripsheet',
       name: 'Tripsheet',
       component: () => import('../views/tripsheet/Tripsheet.vue'),

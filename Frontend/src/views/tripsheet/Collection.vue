@@ -153,6 +153,7 @@
         return{
           trips:[],
           search:'',
+          paid:0,
           unload:'',
           righter:'',
           amaali:'',
@@ -220,15 +221,16 @@
             {
               tablerows: tableValues,
               //Paid
-              unload:this.unload,
+              paid:this.paid,
+              //unload:this.unload,
               //Expenses
-              amaali:this.amaali,
-              righter:this.righter,
+              //amaali:this.amaali,
+              //righter:this.righter,
               //Total
-              miscellaneous:this.miscellaneous,
-              paidtotal:this.paidtotal,
-              topaytotal:this.topaytotal,
-              balance:this.balance,
+              //miscellaneous:this.miscellaneous,
+              //paidtotal:this.paidtotal,
+              //topaytotal:this.topaytotal,
+              //balance:this.balance,
               //expenses:this.expenses,
                auth_token:jwt,
             }                

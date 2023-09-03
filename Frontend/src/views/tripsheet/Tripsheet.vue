@@ -21,9 +21,9 @@
           
 
          <div style="align-items: center;text-align: center;color:blue">
-          <p class="alignleft" style="color:red;font-weight:bold;">Trip Sheet No: {{trip.tripsheetno}}</p>
+          <p class="alignleft" style="color:blue;font-weight:bold;">Trip Sheet No: {{trip.tripsheetno}}</p>
           
-            <router-link class="secondary-content" v-bind:to="{ name: 'view-tripsheet', params: { trip_id: trip._id }}"><i class="fa fa-eye" style="font-size:26px;color:blue"></i></router-link> 
+            <router-link class="secondary-content" v-bind:to="{ name: 'view-tripsheet', params: { trip_id: trip._id }}"><i class="fa fa-edit" style="font-size:26px;color:red"></i></router-link> 
             
          </div>
         </div>
